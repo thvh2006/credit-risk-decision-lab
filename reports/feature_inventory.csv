@@ -1,0 +1,220 @@
+feature,description,source_table,transformed_type,development_missing_rate,oot_missing_rate,status,reason,date_treatment
+clientscnt_136L,Number of applications associated with same email address as client's email.,train_static_0,Float64,0.999644175363127,1.0,excluded,More than 98% missing in development,not applicable
+deferredmnthsnum_166L,Number of deferred months.,train_static_0,Float64,0.0,0.0,excluded,Constant or unsupported type in development,not applicable
+interestrategrace_34L,Interest rate during the grace period.,train_static_0,Float64,0.9845809324021704,0.9972183221604805,excluded,More than 98% missing in development,not applicable
+isbidproductrequest_292L,Flag indicating if the product is a cross-sell.,train_static_0,Boolean,0.9915531479858732,0.9926437145286638,excluded,More than 98% missing in development,not applicable
+lastapprcommoditytypec_5251766M,Commodity type of the last application.,train_static_0,String,0.0,0.0,excluded,Constant or unsupported type in development,not applicable
+lastotherinc_902A,Amount of other income reported by the client in their last application.,train_static_0,Float64,0.9978500048682475,0.9983718615489068,excluded,More than 98% missing in development,not applicable
+lastotherlnsexpense_631A,Monthly expenses on other loans from the last application.,train_static_0,Float64,0.9978862954406649,0.9982663950905364,excluded,Sensitive/protected or proxy-risk policy,not applicable
+lastrejectcommodtypec_5251769M,Commodity type of the last rejected application.,train_static_0,String,0.0,0.0,excluded,Constant or unsupported type in development,not applicable
+lastrepayingdate_696D,Date of the last payment made by the applicant.,train_static_0,Float32,0.998365153969392,0.9993540179424812,excluded,More than 98% missing in development,days before decision date
+payvacationpostpone_4187118D,Date of last payment holiday instalment.,train_static_0,Float32,0.9983509917947901,0.9583737072119283,excluded,More than 98% missing in development,days before decision date
+assignmentdate_4955616D,Tax authority assignment date.,train_static_cb_0,Float32,1.0,0.688419123705564,excluded,More than 98% missing in development,days before decision date
+birthdate_574D,Client's date of birth (credit bureau data).,train_static_cb_0,Float32,0.46195154766014324,1.0,excluded,Sensitive/protected or proxy-risk policy,days before decision date
+contractssum_5085716L,Total sum of values of contracts retrieved from external credit bureau.,train_static_cb_0,Float64,1.0,0.17759233258847648,excluded,More than 98% missing in development,not applicable
+dateofbirth_337D,Client's date of birth.,train_static_cb_0,Float32,0.11185905095727448,0.03626727837212521,excluded,Sensitive/protected or proxy-risk policy,days before decision date
+dateofbirth_342D,Client's date of birth.,train_static_cb_0,Float32,0.9793931508183081,0.9638513713935415,excluded,Sensitive/protected or proxy-risk policy,days before decision date
+education_1103M,Level of education of the client provided by external source.,train_static_cb_0,String,0.022904662010851767,0.0017204216021673357,excluded,Sensitive/protected or proxy-risk policy,not applicable
+education_88M,Education level of the client.,train_static_cb_0,String,0.022904662010851767,0.0017204216021673357,excluded,Sensitive/protected or proxy-risk policy,not applicable
+maritalst_385M,Marital status of the client.,train_static_cb_0,String,0.022904662010851767,0.0017204216021673357,excluded,Sensitive/protected or proxy-risk policy,not applicable
+maritalst_893M,Marital status of the client,train_static_cb_0,String,0.022904662010851767,0.0017204216021673357,excluded,Sensitive/protected or proxy-risk policy,not applicable
+pmtaverage_4955615A,Average of tax deductions.,train_static_cb_0,Float64,1.0,0.6870216931321561,excluded,More than 98% missing in development,not applicable
+pmtcount_4955617L,Number of tax deductions.,train_static_cb_0,Float64,1.0,0.6870216931321561,excluded,More than 98% missing in development,not applicable
+responsedate_4917613D,Tax authority's response date.,train_static_cb_0,Float32,1.0,0.02556902450117661,excluded,More than 98% missing in development,days before decision date
+actualdpdtolerance_344P,DPD of client with tolerance.,train_static_0,Float64,0.2948361170857785,0.20251537503213432,model,Eligible under fitted feature policy,not applicable
+amtinstpaidbefduel24m_4187115A,Number of instalments paid before due date in the last 24 months.,train_static_0,Float64,0.4143259247457447,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+annuity_780A,Monthly annuity amount.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+annuitynextmonth_57A,Next month's amount of annuity.,train_static_0,Float64,1.7702718252387654e-6,0.000013183307296301422,model,Eligible under fitted feature policy,not applicable
+applicationcnt_361L,Number of applications associated with the same email address as the client.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+applications30d_658L,Number of applications made by the client in the last 30 days.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+applicationscnt_1086L,Number of applications associated with the same phone number.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+applicationscnt_464L,Number of applications made in the last 30 days by other clients with the same employer as the applicant.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+applicationscnt_629L,Number of applications with the same employer in the last 7 days.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+applicationscnt_867L,Number of applications associated with the same mobile phone.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+avgdbddpdlast24m_3658932P,Average days past or before due of payment during the last 24 months.,train_static_0,Float64,0.4242544942775963,0.32796772726373863,model,Eligible under fitted feature policy,not applicable
+avgdbddpdlast3m_4187120P,Average days past or before due of payment during the last 3 months.,train_static_0,Float64,0.6498481991909858,0.5416625468831365,model,Eligible under fitted feature policy,not applicable
+avgdbdtollast24m_4525197P,Average days of payment before due date within the last 24 months (with tolerance).,train_static_0,Float64,0.742554679271002,0.3279875022246831,model,Eligible under fitted feature policy,not applicable
+avgdpdtolclosure24_3658938P,"Average DPD (days past due) with tolerance within the past 24 months from the maximum closure date, assuming that the contract is finished. If the contract is ongoing, the calculation is based on the current date.",train_static_0,Float64,0.3276516459102295,0.23085948571918238,model,Eligible under fitted feature policy,not applicable
+avginstallast24m_3658937A,Average instalments paid by the client over the past 24 months.,train_static_0,Float64,0.43169406162316226,0.3357854284904454,model,Eligible under fitted feature policy,not applicable
+avglnamtstart24m_4525187A,Average loan amount in the last 24 months.,train_static_0,Float64,0.9167078254866035,0.8827212982921026,model,Eligible under fitted feature policy,not applicable
+avgmaxdpdlast9m_3716943P,Average Days Past Due (DPD) of the client in last 9 months.,train_static_0,Float64,0.5136877417527461,0.44700640049569235,model,Eligible under fitted feature policy,not applicable
+avgoutstandbalancel6m_4187114A,Average outstanding balance of applicant for the last 6 months.,train_static_0,Float64,0.5874107119148145,0.4483181395716743,model,Eligible under fitted feature policy,not applicable
+avgpmtlast12m_4525200A,Average of payments made by the client in the last 12 months.,train_static_0,Float64,0.7680970463014596,0.397087807418247,model,Eligible under fitted feature policy,not applicable
+bankacctype_710L,Type of applicant's bank account.,train_static_0,String,0.7153075404728396,0.7373885186576756,model,Eligible under fitted feature policy,not applicable
+cardtype_51L,Type of credit card.,train_static_0,String,0.8699292776405817,0.9108808426770024,model,Eligible under fitted feature policy,not applicable
+clientscnt12m_3712952L,Number of clients that have used the same mobile phone as the applicant in the past 12 months.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt3m_3712950L,Number of clients who have the same mobile phone number in the last 3 months.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt6m_3712949L,Total number of clients who have used the same mobile number in the last 6 months.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_100L,Number of applications with matching employer's phone and client's.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_1022L,Number of clients sharing the same mobile phone.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_1071L,Number of applications where the alternative phone number matches that of the client.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_1130L,Number of applications where client's phone number matches the alternative phone contact.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_157L,Number of clients whose employer has the same phone number as the client.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_257L,Number of clients that share an alternative phone number with the applicant.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_304L,Number of clients with the same phone number.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_360L,Number of clients that have the same alternative phone number and employer's phone number.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_493L,Number of clients with matching phone numbers for both the employer and the client.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_533L,Number of clients with same client's and alternative's phone number,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_887L,Number of clients sharing the same employer's phone number.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+clientscnt_946L,Number of clients with matching mobile and employer's number.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+cntincpaycont9m_3716944L,Number of incoming payments in the past 9 months.,train_static_0,Float64,0.32008638926507166,0.2222046444791605,model,Eligible under fitted feature policy,not applicable
+cntpmts24_3658933L,Number of months with any incoming payment in last 24 months.,train_static_0,Float64,0.325090062579109,0.22214531959632713,model,Eligible under fitted feature policy,not applicable
+commnoinclast6m_3546845L,Number of communications indicating low income in the last six months.,train_static_0,Float64,0.2532232224258035,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+credamount_770A,Loan amount or credit card limit.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+credtype_322L,Type of credit.,train_static_0,String,8.851359126193827e-7,0.0,model,Eligible under fitted feature policy,not applicable
+currdebt_22A,Current debt amount of the client.,train_static_0,Float64,1.7702718252387654e-6,0.000013183307296301422,model,Eligible under fitted feature policy,not applicable
+currdebtcredtyperange_828A,Current amount of debt of the applicant.,train_static_0,Float64,1.7702718252387654e-6,0.000013183307296301422,model,Eligible under fitted feature policy,not applicable
+datefirstoffer_1144D,Date of first customer relationship management (CRM) offer.,train_static_0,Float32,0.5607185533338644,0.4940642158898403,model,Eligible under fitted feature policy,days before decision date
+datelastinstal40dpd_247D,Date of last instalment that was more than 40 days past due (DPD).,train_static_0,Float32,0.9267488072793577,0.8483853744388855,model,Eligible under fitted feature policy,days before decision date
+datelastunpaid_3546854D,Date of the last unpaid instalment.,train_static_0,Float32,0.6039335439956806,0.5006360945770465,model,Eligible under fitted feature policy,days before decision date
+daysoverduetolerancedd_3976961L,Number of days that past after the due date (with tolerance).,train_static_0,Float64,0.3182621241491631,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+disbursedcredamount_1113A,Disbursed credit amount after consolidation.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+disbursementtype_67L,Type of disbursement.,train_static_0,String,0.0005470139939987785,0.000843731666963291,model,Eligible under fitted feature policy,not applicable
+downpmt_116A,Amount of downpayment.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+dtlastpmtallstes_4499206D,Date of last payment made by the applicant.,train_static_0,Float32,0.7200279702948388,0.42272274845590513,model,Eligible under fitted feature policy,days before decision date
+eir_270L,Interest rate.,train_static_0,Float64,0.1295228232295069,0.08862478329938632,model,Eligible under fitted feature policy,not applicable
+equalitydataagreement_891L,"Flag indicating sudden changes in client's social-demographic data (e.g. education, family status, housing type).",train_static_0,Boolean,0.9480611097834073,0.9491256171435728,model,Eligible under fitted feature policy,not applicable
+equalityempfrom_62L,Flag indicating a sudden change in the client's length of employment.,train_static_0,Boolean,0.9711038529966276,0.9978643042179992,model,Eligible under fitted feature policy,not applicable
+firstclxcampaign_1125D,Date of the client's first campaign.,train_static_0,Float32,0.5726085840480806,0.5374900301238572,model,Eligible under fitted feature policy,days before decision date
+firstdatedue_489D,Date of the first due date.,train_static_0,Float32,0.3379209927684396,0.2390001779746485,model,Eligible under fitted feature policy,days before decision date
+homephncnt_628L,Number of distinct home phones on client's application.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+inittransactionamount_650A,Initial transaction amount of the credit application.,train_static_0,Float64,0.8696743584977473,0.9096020618692612,model,Eligible under fitted feature policy,not applicable
+inittransactioncode_186L,Transaction type of the initial credit transaction.,train_static_0,String,8.851359126193827e-7,0.0,model,Eligible under fitted feature policy,not applicable
+interestrate_311L,The interest rate of the active credit contract.,train_static_0,Float64,0.1295228232295069,0.08862478329938632,model,Eligible under fitted feature policy,not applicable
+isbidproduct_1095L,Flag indicating if the product is a cross-sell.,train_static_0,Boolean,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+isdebitcard_729L,Flag indicating if the product is a debit card.,train_static_0,Boolean,0.8696743584977473,0.9096020618692612,model,Eligible under fitted feature policy,not applicable
+lastactivateddate_801D,Contract activation date for previous applications.,train_static_0,Float32,0.31885073953105497,0.2222178277864568,model,Eligible under fitted feature policy,days before decision date
+lastapplicationdate_877D,Date of previous customer's application.,train_static_0,Float32,0.21882949626915213,0.1372118623399052,model,Eligible under fitted feature policy,days before decision date
+lastapprcommoditycat_1041M,Commodity category of the last loan applications made by the applicant.,train_static_0,String,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+lastapprcredamount_781A,Credit amount from the client's last application.,train_static_0,Float64,0.31108721244147036,0.21501315034902807,model,Eligible under fitted feature policy,not applicable
+lastapprdate_640D,Date of approval on client's most recent previous application.,train_static_0,Float32,0.31108721244147036,0.21501315034902807,model,Eligible under fitted feature policy,days before decision date
+lastcancelreason_561M,Cancellation reason of the last application.,train_static_0,String,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+lastdelinqdate_224D,Date of the last delinquency occurrence.,train_static_0,Float32,0.6650273949564955,0.5498296057531953,model,Eligible under fitted feature policy,days before decision date
+lastdependentsnum_448L,Number of dependents in the client's last loan application.,train_static_0,Float64,0.9766350673145862,0.9938170288780346,model,Eligible under fitted feature policy,not applicable
+lastrejectcommoditycat_161M,Category of commodity in the applicant's last rejected application.,train_static_0,String,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+lastrejectcredamount_222A,Credit amount on last rejected application.,train_static_0,Float64,0.5275587066394045,0.4273171310486662,model,Eligible under fitted feature policy,not applicable
+lastrejectdate_50D,Date of most recent rejected application by the applicant.,train_static_0,Float32,0.5275587066394045,0.4273171310486662,model,Eligible under fitted feature policy,days before decision date
+lastrejectreason_759M,Reason for rejection on the most recent rejected application.,train_static_0,String,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+lastrejectreasonclient_4145040M,Reason for the client's last loan rejection.,train_static_0,String,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+lastst_736L,Status of the client's previous credit application.,train_static_0,String,0.21882949626915213,0.1372118623399052,model,Eligible under fitted feature policy,not applicable
+maininc_215A,Client's primary income amount.,train_static_0,Float64,0.3410871239278791,0.3215210899958473,model,Eligible under fitted feature policy,not applicable
+mastercontrelectronic_519L,Flag indicating the existence of the master contract for the client.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+mastercontrexist_109L,Flag indicating whether or not the applicant has an existing master contract.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxannuity_159A,Maximum annuity previously obtained by client.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxannuity_4075009A,Maximal annuity offered to the client in the current application.,train_static_0,Float64,0.949675597688025,1.0,model,Eligible under fitted feature policy,not applicable
+maxdbddpdlast1m_3658939P,Maximum number of days past due in the last month. A negative value indicates the number of days before the due date.,train_static_0,Float64,0.6416845906688972,0.6017916114615673,model,Eligible under fitted feature policy,not applicable
+maxdbddpdtollast12m_3658940P,Maximum number of days past due in last 12 months. A negative value implies days before due date.,train_static_0,Float64,0.48172813935579806,0.4041013268998794,model,Eligible under fitted feature policy,not applicable
+maxdbddpdtollast6m_4187119P,Maximum number of days past due in last 6 months. This predictor takes the value as a negative number when it represents days before due date.,train_static_0,Float64,0.6066358639369075,0.4837416862768363,model,Eligible under fitted feature policy,not applicable
+maxdebt4_972A,Maximal principal debt of the client in the history older than 4 months.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxdpdfrom6mto36m_3546853P,Maximum Days Past Due (DPD) in the period ranging from 6 to 36 months.,train_static_0,Float64,0.2532232224258035,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxdpdinstldate_3546855D,Date of instalment on which client was most days past due.,train_static_0,Float32,0.5652274356727476,0.452589531135676,model,Eligible under fitted feature policy,days before decision date
+maxdpdinstlnum_3546846P,Instalment number of which client was most days past due.,train_static_0,Float64,0.5665392070952495,0.45884501044777104,model,Eligible under fitted feature policy,not applicable
+maxdpdlast12m_727P,Maximum days past due in the past 12 months.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxdpdlast24m_143P,Maximal days past due in the last 24 months.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxdpdlast3m_392P,Maximum number of days past due in last 3 months.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxdpdlast6m_474P,Maximum days past due in the last 6 months.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxdpdlast9m_1059P,Maximum days past due in last 9 months.,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxdpdtolerance_374P,Maximum number of days past due (with tolerance).,train_static_0,Float64,0.22015808527399383,0.13506957490425622,model,Eligible under fitted feature policy,not applicable
+maxinstallast24m_3658928A,Maximum instalment in the last 24 months,train_static_0,Float64,0.43169406162316226,0.3357854284904454,model,Eligible under fitted feature policy,not applicable
+maxlnamtstart6m_4525199A,Maximum loan amount started in the last 6 months.,train_static_0,Float64,0.7686750400524001,0.41412064044506847,model,Eligible under fitted feature policy,not applicable
+maxoutstandbalancel12m_4187113A,Maximum outstanding balance in the last 12 months.,train_static_0,Float64,0.5430999229931756,0.3800220161231848,model,Eligible under fitted feature policy,not applicable
+maxpmtlast3m_4525190A,Maximum payment made by the client in the last 3 months.,train_static_0,Float64,0.8142498030572595,0.5291120383370577,model,Eligible under fitted feature policy,not applicable
+mindbddpdlast24m_3658935P,Minimum days past due (or days before due) in last 24 months.,train_static_0,Float64,0.4242544942775963,0.32796772726373863,model,Eligible under fitted feature policy,not applicable
+mindbdtollast24m_4525191P,Minimum days before due in last 24 months.,train_static_0,Float64,0.742554679271002,0.3279875022246831,model,Eligible under fitted feature policy,not applicable
+mobilephncnt_593L,Number of persons with the same mobile phone number.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+monthsannuity_845L,Monthly annuity amount for the applicant.,train_static_0,Float64,0.3182612390132505,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numactivecreds_622L,Number of active credits.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+numactivecredschannel_414L,Number of active credits.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+numactiverelcontr_750L,Number of active revolving credits.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+numcontrs3months_479L,Number of contracts in last 3 months.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+numincomingpmts_3546848L,Number of incoming payments.,train_static_0,Float64,0.32000849730476116,0.22214531959632713,model,Eligible under fitted feature policy,not applicable
+numinstlallpaidearly3d_817L,Number of instalments paid at least 3 days prior to their due date.,train_static_0,Float64,0.3133752887755915,0.2177882365348995,model,Eligible under fitted feature policy,not applicable
+numinstls_657L,Number of instalments.,train_static_0,Float64,1.7702718252387654e-6,0.000013183307296301422,model,Eligible under fitted feature policy,not applicable
+numinstlsallpaid_934L,Number of paid instalments.,train_static_0,Float64,0.3133752887755915,0.2177882365348995,model,Eligible under fitted feature policy,not applicable
+numinstlswithdpd10_728L,Number of instalments that were overdue for 10 or more days.,train_static_0,Float64,0.32108216716676846,0.22234306920577165,model,Eligible under fitted feature policy,not applicable
+numinstlswithdpd5_4187116L,Number of instalments that were overdue by at least 5 days.,train_static_0,Float64,0.4143259247457447,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstlswithoutdpd_562L,Number of instalments that were not past due date.,train_static_0,Float64,0.32108216716676846,0.22234306920577165,model,Eligible under fitted feature policy,not applicable
+numinstmatpaidtearly2d_4499204L,Number of instalments that have been paid more than 2 days before their due date.,train_static_0,Float64,0.6675340998610336,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaid_4499208L,Number of paid instalments.,train_static_0,Float64,0.6675340998610336,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidearly3d_3546850L,Number of instalments paid more than three days before the due date.,train_static_0,Float64,0.31453835736477337,0.2177882365348995,model,Eligible under fitted feature policy,not applicable
+numinstpaidearly3dest_4493216L,Number of instalments that have been paid more than 3 days in advance of the due date.,train_static_0,Float64,0.6617408853129398,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidearly5d_1087L,Number of instalments paid more than 5 days prior to the due date.,train_static_0,Float64,0.3182612390132505,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidearly5dest_4493211L,Number of instalments that were paid more than 5 days before the due date.,train_static_0,Float64,0.6617408853129398,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidearly5dobd_4499205L,Number of installments paid more than 5 days prior to the due date.,train_static_0,Float64,0.6675340998610336,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidearly_338L,Number of installments paid prior to the due date.,train_static_0,Float64,0.3182612390132505,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidearlyest_4493214L,Number of instalments paid before the due date.,train_static_0,Float64,0.6617408853129398,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidlastcontr_4325080L,Number of paid installments from the client's last contract.,train_static_0,Float64,0.5099754817352204,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstpaidlate1d_3546852L,Number of instalments paid more than 1 day past their due date.,train_static_0,Float64,0.3182612390132505,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstregularpaid_973L,Number of fully paid regular installments in the client's previous contracts.,train_static_0,Float64,0.3209334643334484,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstregularpaidest_4493210L,Number of fully paid regular installments on clients' previous contracts.,train_static_0,Float64,0.6617408853129398,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinsttopaygr_769L,Number of unpaid instalments.,train_static_0,Float64,0.3182621241491631,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinsttopaygrest_4493213L,Number of unpaid instalments.,train_static_0,Float64,0.6617408853129398,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstunpaidmax_3546851L,Maximum number of unpaid instalments.,train_static_0,Float64,0.3182621241491631,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numinstunpaidmaxest_4493212L,Maximum number of unpaid instalments.,train_static_0,Float64,0.6617408853129398,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+numnotactivated_1143L,Number of non-activated credits.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+numpmtchanneldd_318L,Number of previous loan contracts for the applicant that had direct debit as payment channel.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+numrejects9m_859L,Number of credit applications that were rejected in the last 9 months.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+opencred_647L,Number of active loans from the previous application.,train_static_0,Boolean,0.21882949626915213,0.1372118623399052,model,Eligible under fitted feature policy,not applicable
+paytype1st_925L,Type of first payment of the client.,train_static_0,String,0.0012498119086185684,0.3223582300091624,model,Eligible under fitted feature policy,not applicable
+paytype_783L,Type of payment.,train_static_0,String,0.0012498119086185684,0.3223582300091624,model,Eligible under fitted feature policy,not applicable
+pctinstlsallpaidearl3d_427L,Percentage of installments paid at least 3 days prior to the due date.,train_static_0,Float64,0.3222611682023775,0.22466992294356886,model,Eligible under fitted feature policy,not applicable
+pctinstlsallpaidlat10d_839L,Percentage of installments that were paid 10 or more days after the due date.,train_static_0,Float64,0.32417748745319847,0.22560593776160626,model,Eligible under fitted feature policy,not applicable
+pctinstlsallpaidlate1d_3546856L,Percentage of installments that are paid 1 or more days after the due date.,train_static_0,Float64,0.3222611682023775,0.22466992294356886,model,Eligible under fitted feature policy,not applicable
+pctinstlsallpaidlate4d_3546849L,Percentage of installments that were paid 4 or more days past their due date.,train_static_0,Float64,0.32304982430052137,0.22508519712340236,model,Eligible under fitted feature policy,not applicable
+pctinstlsallpaidlate6d_3546844L,Percentage of installments that were paid 6 or more days past their due date.,train_static_0,Float64,0.32323393257034616,0.22515111365988386,model,Eligible under fitted feature policy,not applicable
+pmtnum_254L,Total number of loan payments made by the client.,train_static_0,Float64,0.02761712560963736,0.044526620393258054,model,Eligible under fitted feature policy,not applicable
+posfpd10lastmonth_333P,Average FPD10 (Share of contracts with first installment past due more than 10 days) from point of sales that processed contract in the previous month.,train_static_0,Float64,0.01941368597148092,0.24248716275452023,model,Eligible under fitted feature policy,not applicable
+posfpd30lastmonth_3976960P,Average FPD30 (Share of contracts with first installment past due more than 30 days) from point of sales that processed contract in the previous month.,train_static_0,Float64,0.06161608114926047,0.24832736788678175,model,Eligible under fitted feature policy,not applicable
+posfstqpd30lastmonth_3976962P,"Average FSTPD30 (share of contracts with first, second, or third installment past due more than 30 days) from point of sale that processed contract in the last month.",train_static_0,Float64,0.092200182337998,0.29158839077959486,model,Eligible under fitted feature policy,not applicable
+previouscontdistrict_112M,Contact district of the client's previous approved application.,train_static_0,String,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+price_1097A,Credit price.,train_static_0,Float64,0.12975915451817627,0.21281812968419386,model,Eligible under fitted feature policy,not applicable
+sellerplacecnt_915L,Number of sellerplaces where the same client's document was used.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+sellerplacescnt_216L,Number of sellerplaces where the same client's mobile phone was used.,train_static_0,Float64,0.0,0.0,model,Eligible under fitted feature policy,not applicable
+sumoutstandtotal_3546847A,Sum of total outstanding amount.,train_static_0,Float64,0.31359126193827064,0.2161337314692137,model,Eligible under fitted feature policy,not applicable
+sumoutstandtotalest_4493215A,Sum of total outstanding amount.,train_static_0,Float64,0.6617408853129398,0.221090655012623,model,Eligible under fitted feature policy,not applicable
+totaldebt_9A,Total amount of debt.,train_static_0,Float64,1.7702718252387654e-6,6.591653648150711e-6,model,Eligible under fitted feature policy,not applicable
+totalsettled_863A,Sum of all payments made by the client.,train_static_0,Float64,1.7702718252387654e-6,0.000013183307296301422,model,Eligible under fitted feature policy,not applicable
+totinstallast1m_4525188A,Total amount of monthly instalments paid in the previous month.,train_static_0,Float64,0.8365720456376077,0.5820364254780597,model,Eligible under fitted feature policy,not applicable
+twobodfilling_608L,Type of application process.,train_static_0,String,0.0000407162519804916,0.00018456630214821993,model,Eligible under fitted feature policy,not applicable
+typesuite_864L,Persons accompanying the client during the loan application process.,train_static_0,String,0.7151491011444807,0.8486556322384596,model,Eligible under fitted feature policy,not applicable
+validfrom_1069D,Date since the client has an active campaign.,train_static_0,Float32,0.8863945758871274,1.0,model,Eligible under fitted feature policy,days before decision date
+assignmentdate_238D,Tax authority data - date of assignment.,train_static_cb_0,Float32,0.878739920514795,1.0,model,Eligible under fitted feature policy,days before decision date
+assignmentdate_4527235D,Tax authority data - Date of assignment.,train_static_cb_0,Float32,0.928771342839693,0.9972512804287211,model,Eligible under fitted feature policy,days before decision date
+days120_123L,Number of credit bureau queries for the last 120 days.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+days180_256L,Number of credit bureau queries for last 180 days.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+days30_165L,Number of credit bureau queries for the last 30 days.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+days360_512L,Number of Credit Bureau queries for last 360 days.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+days90_310L,Number of credit bureau queries for the last 90 days.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+description_5085714M,Categorization of clients by credit bureau.,train_static_cb_0,String,0.022904662010851767,0.0017204216021673357,model,Eligible under fitted feature policy,not applicable
+firstquarter_103L,Number of results obtained from credit bureau in the first quarter.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+for3years_128L,Number of rejected applications in the past 3 years.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+for3years_504L,Client's credit history data over the last three years.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+for3years_584L,Number of cancellations in the last 3 years.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+formonth_118L,Number of rejections in a month.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+formonth_206L,Number of cancelations in the previous month.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+formonth_535L,Credit history for the last month.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+forquarter_1017L,Number of cancellations recorded in the credit bureau in the last quarter.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+forquarter_462L,Number of credit applications that were rejected in the last quarter.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+forquarter_634L,Credit history for the last quarter.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+fortoday_1092L,Client's credit history for today.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+forweek_1077L,Number of cancelations in the last week.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+forweek_528L,Credit history for the last week.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+forweek_601L,Number of rejected applications in the last week.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+foryear_618L,Number of application rejections in the previous year.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+foryear_818L,Number of cancelations that occurred in last year.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+foryear_850L,Credit history for the last year.,train_static_cb_0,Float64,0.9793825291873567,0.9638447797398934,model,Eligible under fitted feature policy,not applicable
+fourthquarter_440L,Number of results in fourth quarter.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+numberofqueries_373L,Number of queries to credit bureau.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+pmtaverage_3A,Average of tax deductions.,train_static_cb_0,Float64,0.8729042194428954,1.0,model,Eligible under fitted feature policy,not applicable
+pmtaverage_4527227A,Average of tax deductions.,train_static_cb_0,Float64,0.928771342839693,0.9972512804287211,model,Eligible under fitted feature policy,not applicable
+pmtcount_4527229L,Number of tax deductions.,train_static_cb_0,Float64,0.928771342839693,0.9972512804287211,model,Eligible under fitted feature policy,not applicable
+pmtcount_693L,Number of tax deductions.,train_static_cb_0,Float64,0.8704107915770467,1.0,model,Eligible under fitted feature policy,not applicable
+pmtscount_423L,Number of tax deduction payments.,train_static_cb_0,Float64,0.4931375412694619,1.0,model,Eligible under fitted feature policy,not applicable
+pmtssum_45A,Sum of tax deductions for the client.,train_static_cb_0,Float64,0.4931375412694619,1.0,model,Eligible under fitted feature policy,not applicable
+requesttype_4525192L,Tax authority request type.,train_static_cb_0,String,0.5552315958115369,0.9845096139268458,model,Eligible under fitted feature policy,not applicable
+responsedate_1012D,Tax authority's response date.,train_static_cb_0,Float32,0.36270214291404446,1.0,model,Eligible under fitted feature policy,days before decision date
+responsedate_4527233D,Tax authority's response date.,train_static_cb_0,Float32,0.5654301317967374,0.9848523799165496,model,Eligible under fitted feature policy,days before decision date
+riskassesment_302T,Estimated probability that the client will default on their credit obligation within the next year.,train_static_cb_0,String,0.9647733609495738,0.9633306307553376,model,Eligible under fitted feature policy,not applicable
+riskassesment_940T,Estimate of client's creditworthiness.,train_static_cb_0,Float64,0.9647733609495738,0.9633240391016894,model,Eligible under fitted feature policy,not applicable
+secondquarter_766L,Number of results in second quarter.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
+thirdquarter_1082L,Number of results in third quarter.,train_static_cb_0,Float64,0.11185905095727448,0.03626727837212521,model,Eligible under fitted feature policy,not applicable
