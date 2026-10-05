@@ -1,0 +1,62 @@
+feature,description,applications_as_top_reason,share_as_top_reason,mean_positive_log_odds_contribution
+annuity_780A,Monthly annuity amount.,2291,0.2291,0.3074025511741638
+avgdpdtolclosure24_3658938P,"Average DPD (days past due) with tolerance within the past 24 months from the maximum closure date, assuming that the contract is finished. If the contract is ongoing, the calculation is based on the current date.",1286,0.1286,0.4929227828979492
+lastrejectdate_50D,Date of most recent rejected application by the applicant.,958,0.0958,0.2776965796947479
+mobilephncnt_593L,Number of persons with the same mobile phone number.,949,0.0949,0.3368982672691345
+pmtnum_254L,Total number of loan payments made by the client.,917,0.0917,0.26413223147392273
+thirdquarter_1082L,Number of results in third quarter.,432,0.0432,0.1428167223930359
+eir_270L,Interest rate.,363,0.0363,0.21557995676994324
+maxinstallast24m_3658928A,Maximum instalment in the last 24 months,304,0.0304,0.3050359785556793
+credamount_770A,Loan amount or credit card limit.,279,0.0279,0.09354764223098755
+lastdelinqdate_224D,Date of the last delinquency occurrence.,259,0.0259,0.2558315098285675
+currdebt_22A,Current debt amount of the client.,246,0.0246,0.26124510169029236
+numrejects9m_859L,Number of credit applications that were rejected in the last 9 months.,199,0.0199,0.34821638464927673
+applicationscnt_867L,Number of applications associated with the same mobile phone.,162,0.0162,0.18071334064006805
+homephncnt_628L,Number of distinct home phones on client's application.,140,0.014,0.07936370372772217
+mindbddpdlast24m_3658935P,Minimum days past due (or days before due) in last 24 months.,129,0.0129,0.21943937242031097
+days90_310L,Number of credit bureau queries for the last 90 days.,123,0.0123,0.25293847918510437
+riskassesment_940T,Estimate of client's creditworthiness.,112,0.0112,0.6099533438682556
+lastapprdate_640D,Date of approval on client's most recent previous application.,96,0.0096,0.31841138005256653
+maxannuity_159A,Maximum annuity previously obtained by client.,80,0.008,0.1405026614665985
+price_1097A,Credit price.,77,0.0077,0.23549966514110565
+fourthquarter_440L,Number of results in fourth quarter.,73,0.0073,0.08783134073019028
+riskassesment_302T,Estimated probability that the client will default on their credit obligation within the next year.,55,0.0055,0.2255573272705078
+posfstqpd30lastmonth_3976962P,"Average FSTPD30 (share of contracts with first, second, or third installment past due more than 30 days) from point of sale that processed contract in the last month.",53,0.0053,0.15944041311740875
+totalsettled_863A,Sum of all payments made by the client.,41,0.0041,0.10470660030841827
+days30_165L,Number of credit bureau queries for the last 30 days.,38,0.0038,0.15622811019420624
+downpmt_116A,Amount of downpayment.,37,0.0037,0.21535038948059082
+lastrejectreason_759M,Reason for rejection on the most recent rejected application.,36,0.0036,0.1419113129377365
+clientscnt12m_3712952L,Number of clients that have used the same mobile phone as the applicant in the past 12 months.,22,0.0022,0.13316704332828522
+numinstpaidearly_338L,Number of installments paid prior to the due date.,21,0.0021,0.08937115222215652
+lastapprcredamount_781A,Credit amount from the client's last application.,17,0.0017,0.12548503279685974
+maxdebt4_972A,Maximal principal debt of the client in the history older than 4 months.,17,0.0017,0.09180862456560135
+lastapplicationdate_877D,Date of previous customer's application.,16,0.0016,0.10489319264888763
+pctinstlsallpaidlate1d_3546856L,Percentage of installments that are paid 1 or more days after the due date.,16,0.0016,0.10120002925395966
+previouscontdistrict_112M,Contact district of the client's previous approved application.,16,0.0016,0.10065986216068268
+days360_512L,Number of Credit Bureau queries for last 360 days.,14,0.0014,0.23679737746715546
+maxdpdinstldate_3546855D,Date of instalment on which client was most days past due.,12,0.0012,0.11473327875137329
+totaldebt_9A,Total amount of debt.,12,0.0012,0.10818332433700562
+avgpmtlast12m_4525200A,Average of payments made by the client in the last 12 months.,11,0.0011,0.07876181602478027
+numinstlswithdpd10_728L,Number of instalments that were overdue for 10 or more days.,10,0.001,0.1426849067211151
+twobodfilling_608L,Type of application process.,10,0.001,0.13570313155651093
+inittransactionamount_650A,Initial transaction amount of the credit application.,9,0.0009,0.13520404696464539
+avglnamtstart24m_4525187A,Average loan amount in the last 24 months.,8,0.0008,0.08884674310684204
+numinsttopaygr_769L,Number of unpaid instalments.,8,0.0008,0.2161162793636322
+dtlastpmtallstes_4499206D,Date of last payment made by the applicant.,7,0.0007,0.08325386047363281
+lastactivateddate_801D,Contract activation date for previous applications.,7,0.0007,0.0825359970331192
+cntpmts24_3658933L,Number of months with any incoming payment in last 24 months.,6,0.0006,0.08543124049901962
+numincomingpmts_3546848L,Number of incoming payments.,5,0.0005,0.11385209858417511
+maininc_215A,Client's primary income amount.,3,0.0003,0.07944764941930771
+days120_123L,Number of credit bureau queries for the last 120 days.,2,0.0002,0.08705626428127289
+numinstls_657L,Number of instalments.,2,0.0002,0.08443635702133179
+maxdbddpdtollast12m_3658940P,Maximum number of days past due in last 12 months. A negative value implies days before due date.,2,0.0002,0.157934308052063
+lastapprcommoditycat_1041M,Commodity category of the last loan applications made by the applicant.,2,0.0002,0.053043387830257416
+numinstlallpaidearly3d_817L,Number of instalments paid at least 3 days prior to their due date.,2,0.0002,0.08439889550209045
+days180_256L,Number of credit bureau queries for last 180 days.,1,0.0001,0.22484330832958221
+maxdpdlast3m_392P,Maximum number of days past due in last 3 months.,1,0.0001,0.11713052541017532
+clientscnt6m_3712949L,Total number of clients who have used the same mobile number in the last 6 months.,1,0.0001,0.10740797221660614
+lastrejectcredamount_222A,Credit amount on last rejected application.,1,0.0001,0.05982692912220955
+clientscnt_100L,Number of applications with matching employer's phone and client's.,1,0.0001,0.09243098646402359
+daysoverduetolerancedd_3976961L,Number of days that past after the due date (with tolerance).,1,0.0001,0.08504397422075272
+typesuite_864L,Persons accompanying the client during the loan application process.,1,0.0001,0.07601319253444672
+requesttype_4525192L,Tax authority request type.,1,0.0001,0.11036043614149094

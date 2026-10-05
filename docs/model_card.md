@@ -50,14 +50,37 @@ would invalidate the locked test. A production design would require delayed-labe
 recalibration, calibration-intercept monitoring, and fallback rules while labels
 mature.
 
+### Delayed-label recalibration backtest
+
+To test that production design without altering the headline locked-OOT result, an
+intercept-only correction is estimated on early OOT weeks 78–84 and evaluated on
+strictly later weeks 85–91 (102,366 applications). It preserves every applicant's
+risk ordering.
+
+| Version | Evaluation AUC | Brier | ECE | Observed rate | Mean predicted PD |
+|---|---:|---:|---:|---:|---:|
+| Original calibration | 0.8335 | 0.01909 | 0.01352 | 2.057% | 3.409% |
+| Intercept refresh | 0.8335 | **0.01880** | **0.00269** | 2.057% | 2.310% |
+
+The correction reduces ECE by **80.1%** and leaves discrimination unchanged. This is
+evidence that much of the observed error is a prevalence-level shift; it is not a
+claim that all calibration drift is solved.
+
 ## Driver review
 
-The leading model inputs are dominated by prior delinquency and repayment-behaviour
-summaries, including average DPD tolerance at closure, recent rejection counts,
-payment averages, late-payment ratios, and recent maximum DPD. This is directionally
-plausible for credit risk. Feature importance is not a reason code and does not prove
-causality; local reason-code generation and stability checks remain required before
-customer communication.
+The leading global inputs are dominated by prior delinquency and repayment behaviour.
+In a deterministic 10,000-application OOT sample, the largest positive local log-odds
+contribution is aggregated into a privacy-safe reason-code report. Monthly annuity is
+the top local reason for 22.9% of sampled applications; average tolerated DPD at
+closure accounts for 12.9%, most-recent rejection date 9.6%, shared-mobile count 9.5%,
+and payment count 9.2%.
+
+![Recalibration and reason-code evidence](../reports/figures/recalibration_and_reasons.png)
+
+These are **candidate internal reason codes**, not customer-facing adverse-action
+notices. Direction, actionability, semantic accuracy, correlation, stability, and
+legal suitability must be reviewed before communication. Global gain still must not
+be substituted for a local explanation.
 
 ## Fairness boundary
 

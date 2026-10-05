@@ -2,11 +2,22 @@ import numpy as np
 import pytest
 
 from src.metrics import (
+    apply_calibration_intercept,
     approval_policy_table,
+    calibration_intercept_offset,
     expected_calibration_error,
     gini_stability,
     population_stability_index,
 )
+
+
+def test_calibration_intercept_preserves_rank_and_moves_mean_toward_observed_rate():
+    y = np.array([0, 0, 0, 1])
+    probability = np.array([0.2, 0.3, 0.4, 0.5])
+    offset = calibration_intercept_offset(y, probability)
+    refreshed = apply_calibration_intercept(probability, offset)
+    assert np.array_equal(np.argsort(probability), np.argsort(refreshed))
+    assert abs(refreshed.mean() - y.mean()) < abs(probability.mean() - y.mean())
 
 
 def test_stability_penalises_falling_weekly_gini():
@@ -41,4 +52,3 @@ def test_stricter_approval_policy_has_lower_bad_rate():
     table = approval_policy_table(y, pd, exposure, approval_rates=(0.5, 1.0))
     assert table.iloc[0].observed_bad_rate < table.iloc[1].observed_bad_rate
     assert table.iloc[0].approved_exposure < table.iloc[1].approved_exposure
-

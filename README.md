@@ -15,6 +15,7 @@ has the best AUC?”:
 - an interpretable logistic baseline and an XGBoost challenger;
 - discrimination, calibration, time stability, and drift diagnostics;
 - approval/manual-review/decline policy simulation with explicit LGD assumptions;
+- delayed-label intercept recalibration and aggregate local reason-code evidence;
 - model-risk controls, adverse-action design, fairness measurement boundaries, and
   monitoring triggers.
 
@@ -108,7 +109,8 @@ calibration method, and whether a parameter is observed or assumed.
 - [x] logistic and XGBoost OOT benchmark
 - [x] calibration, policy, OOT transfer, and LGD sensitivity reports
 - [x] model card and executive decision memo
-- [ ] local reason-code prototype and protected-group audit (requires validated audit data)
+- [x] privacy-safe local reason-code prototype and rolling recalibration backtest
+- [ ] protected-group audit (requires validated and lawful audit attributes)
 
 See [the model development charter](docs/model_development_charter.md) for the
 intended use and [the research synthesis](docs/research_synthesis.md) for how each
