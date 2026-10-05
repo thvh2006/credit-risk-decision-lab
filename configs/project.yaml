@@ -1,0 +1,31 @@
+project:
+  name: credit-risk-decision-lab
+  random_seed: 20261004
+
+data:
+  application_key: case_id
+  target: target
+  cohort: WEEK_NUM
+  decision_date: date_decision
+  raw_dir: data/raw
+  prepared_dir: data/processed
+
+split:
+  development: 0.60
+  calibration: 0.15
+  policy: 0.10
+  oot: 0.15
+  minimum_weeks_per_partition: 2
+
+policy:
+  approval_rates: [0.20, 0.40, 0.60, 0.80]
+  lgd_scenarios: [0.25, 0.45, 0.65]
+  note: Scenario LGDs are assumptions, not estimates from the source data.
+
+monitoring:
+  auc_drop_warning: 0.03
+  auc_drop_breach: 0.05
+  psi_warning: 0.10
+  psi_breach: 0.25
+  calibration_gap_warning: 0.02
+  calibration_gap_breach: 0.05
