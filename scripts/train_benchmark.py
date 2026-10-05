@@ -15,7 +15,13 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 from src.features import build_manifest, encode_features, load_depth0, transform_dates
-from src.metrics import approval_policy_table, population_stability_index, probability_metrics
+from src.metrics import (
+    apply_calibration_intercept,
+    approval_policy_table,
+    calibration_intercept_offset,
+    population_stability_index,
+    probability_metrics,
+)
 from src.temporal import assign_temporal_partitions
 
 RAW = Path("data/raw")
@@ -174,10 +180,74 @@ def main() -> None:
             )
     pd.DataFrame(oot_policy_rows).to_csv(REPORTS / "oot_policy_validation.csv", index=False)
 
+    # Production-like delayed-label exercise: estimate only a calibration intercept
+    # on early OOT weeks and assess it on strictly later OOT weeks. Ranking is fixed.
+    early_oot = oot & (week <= 84)
+    late_oot = oot & (week >= 85)
+    early_pd = predictions["oot"]["challenger"][week[oot] <= 84]
+    late_pd = predictions["oot"]["challenger"][week[oot] >= 85]
+    offset = calibration_intercept_offset(y[early_oot], early_pd)
+    refreshed_late_pd = apply_calibration_intercept(late_pd, offset)
+    calibration_rows = []
+    for version, probability in (
+        ("original_calibration", late_pd),
+        ("intercept_refresh", refreshed_late_pd),
+    ):
+        result = probability_metrics(y[late_oot], probability, week[late_oot])
+        stability = result.pop("stability")
+        calibration_rows.append(
+            {
+                "version": version,
+                "fit_weeks": "78-84" if version == "intercept_refresh" else "55-68",
+                "evaluation_weeks": "85-91",
+                "rows": int(late_oot.sum()),
+                "logit_intercept_offset": offset if version == "intercept_refresh" else 0.0,
+                **result,
+                **{f"stability_{key}": value for key, value in stability.items()},
+            }
+        )
+    pd.DataFrame(calibration_rows).to_csv(REPORTS / "recalibration_backtest.csv", index=False)
+
+    # Privacy-safe reason-code evidence: aggregate local positive-risk contributions,
+    # never publish application-level explanations or identifiers.
+    reason_idx = deterministic_sample(np.flatnonzero(oot), 10_000, SEED + 1)
+    contributions = challenger.get_booster().predict(
+        xgb.DMatrix(X[reason_idx]), pred_contribs=True
+    )[:, :-1]
+    positive = np.where(contributions > 0, contributions, -np.inf)
+    top_reason = positive.argmax(axis=1)
+    has_positive_reason = np.isfinite(positive.max(axis=1))
+    top_reason = top_reason[has_positive_reason]
+    definitions = dict(
+        pd.read_csv(RAW / "feature_definitions.csv")[["Variable", "Description"]].itertuples(
+            index=False, name=None
+        )
+    )
+    reason_rows = []
+    for index, count in zip(*np.unique(top_reason, return_counts=True), strict=True):
+        mask = top_reason == index
+        feature = feature_names[index]
+        reason_rows.append(
+            {
+                "feature": feature,
+                "description": definitions.get(feature, "Definition unavailable in source file"),
+                "applications_as_top_reason": int(count),
+                "share_as_top_reason": float(count / len(reason_idx)),
+                "mean_positive_log_odds_contribution": float(
+                    contributions[has_positive_reason][mask, index].mean()
+                ),
+            }
+        )
+    pd.DataFrame(reason_rows).sort_values(
+        "applications_as_top_reason", ascending=False
+    ).to_csv(REPORTS / "reason_code_summary.csv", index=False)
+
     importance = pd.DataFrame(
         {"feature": feature_names, "gain": challenger.feature_importances_}
     ).sort_values("gain", ascending=False)
     importance.to_csv(REPORTS / "feature_importance.csv", index=False)
+    Path("models").mkdir(exist_ok=True)
+    challenger.save_model("models/challenger.json")
     metadata = {
         "seed": SEED,
         "fit_rows": len(fit_idx),

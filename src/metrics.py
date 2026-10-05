@@ -2,6 +2,7 @@ from dataclasses import asdict, dataclass
 
 import numpy as np
 import pandas as pd
+from scipy.special import expit, logit
 from sklearn.metrics import average_precision_score, brier_score_loss, roc_auc_score
 
 
@@ -89,6 +90,21 @@ def population_stability_index(reference, current, bins: int = 10, epsilon=1e-6)
     return float(np.sum((cur_share - ref_share) * np.log(cur_share / ref_share)))
 
 
+def calibration_intercept_offset(y_true, probability, epsilon: float = 1e-6) -> float:
+    """Estimate a prevalence-only log-odds correction while preserving rank."""
+    observed = float(np.asarray(y_true).mean())
+    predicted = float(np.asarray(probability, dtype=float).mean())
+    return float(
+        logit(np.clip(observed, epsilon, 1 - epsilon))
+        - logit(np.clip(predicted, epsilon, 1 - epsilon))
+    )
+
+
+def apply_calibration_intercept(probability, offset: float, epsilon: float = 1e-6):
+    probability = np.asarray(probability, dtype=float)
+    return expit(logit(np.clip(probability, epsilon, 1 - epsilon)) + offset)
+
+
 def approval_policy_table(
     y_true,
     probability,
@@ -119,4 +135,3 @@ def approval_policy_table(
             }
         )
     return pd.DataFrame(rows)
-

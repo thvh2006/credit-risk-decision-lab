@@ -62,6 +62,37 @@ def main() -> None:
     fig.savefig(FIGURES / "oot_policy_frontier.png", dpi=180)
     plt.close(fig)
 
+    recalibration = pd.read_csv(REPORTS / "recalibration_backtest.csv").set_index("version")
+    reasons = pd.read_csv(REPORTS / "reason_code_summary.csv").head(8).sort_values(
+        "share_as_top_reason"
+    )
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+    calibration_plot = recalibration[
+        ["observed_default_rate", "mean_predicted_pd"]
+    ].mul(100)
+    calibration_plot.plot.bar(ax=axes[0], color=["#6b7280", "#e76f51"])
+    axes[0].set(
+        title="Delayed-label calibration backtest (weeks 85–91)",
+        xlabel="",
+        ylabel="Rate (%)",
+    )
+    axes[0].tick_params(axis="x", rotation=0)
+    axes[0].set_xticklabels(["Original", "Intercept refresh"])
+    axes[0].legend(["Observed", "Predicted"], frameon=False)
+    axes[1].barh(
+        reasons.feature,
+        reasons.share_as_top_reason * 100,
+        color="#1f4e79",
+    )
+    axes[1].set(
+        title="Top local positive-risk reason in OOT sample",
+        xlabel="Share of applications (%)",
+        ylabel="",
+    )
+    fig.tight_layout()
+    fig.savefig(FIGURES / "recalibration_and_reasons.png", dpi=180)
+    plt.close(fig)
+
 
 if __name__ == "__main__":
     main()
