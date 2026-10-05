@@ -8,6 +8,30 @@ has the best AUC?”:
 > applicant population changes, and turn the score into a controlled underwriting
 > policy with honest economic and regulatory boundaries?
 
+**[Open the interactive decision dashboard](https://nhatphan220506.github.io/credit-risk-decision-lab/)** ·
+[Model card](docs/model_card.md) ·
+[Executive decision memo](docs/executive_decision_memo.md) ·
+[Reproduce the analysis](#reproduce)
+
+## Executive snapshot
+
+| Scale | Locked OOT performance | Calibration action | Recommended decision |
+|---|---|---|---|
+| **1.53M** applications across 92 weeks | **0.8253 AUC**, **0.6507 Gini** | ECE reduced **80.1%** with a delayed-label intercept refresh | Advance to **shadow mode**, not automated decline |
+
+The challenger preserves risk ordering in future cohorts, but its absolute PD level
+does not travel unchanged across prevalence regimes. The project therefore separates
+four questions that are often collapsed into one: ranking, calibration, underwriting
+policy, and production monitoring.
+
+![Locked out-of-time model comparison and calibration level](reports/figures/oot_model_comparison.png)
+
+The [interactive dashboard](https://nhatphan220506.github.io/credit-risk-decision-lab/)
+lets reviewers move the approval target and LGD assumption, then see the frozen OOT
+cut-off, realised approval rate, bad rate, exposure proxy, and scenario loss.
+
+![Delayed-label recalibration and aggregate local reason-code evidence](reports/figures/recalibration_and_reasons.png)
+
 ## What this demonstrates
 
 - leakage-safe relational feature engineering at application time;
@@ -60,6 +84,7 @@ chronological feature pipeline
 | `src/monitoring.py` | weekly performance and trigger evaluation |
 | `configs/project.yaml` | reproducible target, split, and policy assumptions |
 | `reports/` | reproducible metrics, policy tables, feature inventory, and figures |
+| `dashboard/` | interactive visual case study and policy simulator |
 | `docs/` | research, data profile, model card, decision memo, and controls |
 | `tests/` | executable checks for metric and split behaviour |
 

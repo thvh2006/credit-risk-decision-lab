@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive portfolio dashboard for time-stable credit risk modelling, calibration and underwriting policy analysis.">
+  <title>Credit Risk Decision Lab</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a1726'/%3E%3Cpath d='M8 23V9h5c5 0 8 2.6 8 7s-3 7-8 7H8zm4-3h1c2.6 0 4-1.2 4-4s-1.4-4-4-4h-1v8z' fill='%2337e0c2'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #07111d;
+      --navy: #0a1726;
+      --panel: #102235;
+      --panel-2: #132a40;
+      --line: #284156;
+      --muted: #95aabc;
+      --text: #eef7fb;
+      --teal: #37e0c2;
+      --teal-soft: #8cf2df;
+      --amber: #ffbd59;
+      --red: #ff7a78;
+      --blue: #72a7ff;
+      --white-panel: #f4f8fa;
+      --white-ink: #132536;
+      --shadow: 0 20px 60px rgba(0,0,0,.2);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+    .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(7,17,29,.86);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(149,170,188,.18);
+    }
+    .topbar-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 750; letter-spacing: -.02em; text-decoration: none; }
+    .brand-mark { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; background: var(--teal); color: var(--ink); font-weight: 900; }
+    nav { display: flex; gap: 24px; align-items: center; }
+    nav a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 650; }
+    nav a:hover, nav a:focus-visible { color: var(--text); }
+    .github-link { border: 1px solid var(--line); border-radius: 999px; padding: 9px 15px; color: var(--text); }
+
+    .hero { padding: 56px 0 44px; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; width: 680px; height: 680px; border-radius: 50%; right: -280px; top: -390px; background: radial-gradient(circle, rgba(55,224,194,.18), rgba(55,224,194,0) 68%); pointer-events: none; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--teal-soft); font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .13em; }
+    .eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--teal); }
+    .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 46px; align-items: end; margin-top: 18px; }
+    h1 { margin: 0; font-size: clamp(2.8rem, 6vw, 5.8rem); line-height: .96; letter-spacing: -.065em; max-width: 790px; }
+    .hero-copy p { max-width: 720px; color: #b9c9d5; font-size: 1.12rem; margin: 26px 0 0; }
+    .verdict { border-left: 2px solid var(--teal); padding: 8px 0 8px 20px; color: #d7e7ef; }
+    .verdict strong { display: block; color: var(--teal); font-size: 1.05rem; margin-bottom: 8px; }
+    .hero-actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 10px; text-decoration: none; font-weight: 760; border: 1px solid var(--line); }
+    .button.primary { background: var(--teal); color: var(--ink); border-color: var(--teal); }
+    .button.secondary { color: var(--text); }
+    .button:hover { transform: translateY(-1px); }
+
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 48px; }
+    .kpi { background: linear-gradient(145deg, rgba(19,42,64,.95), rgba(12,30,47,.95)); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+    .kpi-label { color: var(--muted); font-size: .76rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+    .kpi-value { font-size: clamp(1.7rem, 3.3vw, 2.7rem); line-height: 1.05; margin-top: 10px; font-weight: 790; letter-spacing: -.05em; }
+    .kpi-note { color: #9eb4c4; font-size: .82rem; margin-top: 8px; }
+    .kpi-accent { color: var(--teal); }
+
+    section { padding: 76px 0; }
+    .section-head { display: grid; grid-template-columns: .72fr 1.28fr; gap: 40px; align-items: start; margin-bottom: 34px; }
+    .section-index { color: var(--teal); font-size: .78rem; letter-spacing: .13em; text-transform: uppercase; font-weight: 800; }
+    h2 { margin: 8px 0 0; font-size: clamp(2rem, 4vw, 3.35rem); line-height: 1.03; letter-spacing: -.045em; }
+    .section-intro { color: #afc1cf; font-size: 1.05rem; max-width: 650px; margin: 7px 0 0; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+    .panel-pad { padding: 26px; }
+    .panel-title { font-size: 1rem; font-weight: 800; margin: 0; }
+    .panel-sub { color: var(--muted); font-size: .87rem; margin: 4px 0 0; }
+
+    .timeline { display: grid; grid-template-columns: 55fr 14fr 9fr 14fr; gap: 4px; margin-top: 24px; }
+    .phase { min-height: 146px; padding: 20px 18px; position: relative; background: #16324a; border-top: 4px solid var(--blue); }
+    .phase:first-child { border-radius: 12px 0 0 12px; }
+    .phase:last-child { border-radius: 0 12px 12px 0; }
+    .phase.cal { background: #153a39; border-color: var(--teal); }
+    .phase.policy { background: #3c3021; border-color: var(--amber); }
+    .phase.oot { background: #3a252b; border-color: var(--red); }
+    .phase strong { display: block; font-size: .9rem; }
+    .phase .weeks { display: block; color: #dbe8ee; font-size: 1.28rem; margin-top: 10px; font-weight: 780; }
+    .phase small { display: block; color: #a9bdc9; margin-top: 8px; }
+    .phase .rate { position: absolute; bottom: 16px; left: 18px; font-size: .8rem; font-weight: 700; }
+    .diagnosis { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .diagnosis-card { background: rgba(255,255,255,.03); border: 1px solid var(--line); padding: 20px; border-radius: 12px; }
+    .diagnosis-card strong { color: var(--text); }
+    .diagnosis-card p { color: var(--muted); margin: 7px 0 0; font-size: .9rem; }
+
+    .model-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 18px; }
+    .metric-row { display: grid; grid-template-columns: 145px 1fr 54px; gap: 14px; align-items: center; margin: 22px 0; }
+    .metric-label { color: #c5d4dd; font-size: .9rem; }
+    .track { height: 12px; background: #223a4d; border-radius: 999px; overflow: hidden; }
+    .bar { height: 100%; border-radius: inherit; background: var(--blue); }
+    .bar.challenger { background: var(--teal); }
+    .metric-value { font-weight: 780; text-align: right; }
+    .legend { display: flex; gap: 18px; margin-top: 14px; color: var(--muted); font-size: .8rem; }
+    .legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); margin-right: 7px; }
+    .legend span:last-child::before { background: var(--teal); }
+    .calibration-card { background: var(--white-panel); color: var(--white-ink); }
+    .calibration-card .panel-sub { color: #5e7280; }
+    .cal-bars { display: flex; align-items: end; justify-content: center; gap: 16px; min-height: 230px; padding-top: 26px; }
+    .cal-group { display: flex; align-items: end; gap: 7px; position: relative; padding-bottom: 32px; }
+    .cal-col { width: 50px; border-radius: 8px 8px 2px 2px; position: relative; transition: height .35s ease; }
+    .cal-col.observed { background: #8193a0; height: 110px; }
+    .cal-col.predicted { background: #e56b50; height: 182px; }
+    .cal-col span { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); font-size: .76rem; font-weight: 800; white-space: nowrap; }
+    .cal-group-label { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); font-size: .8rem; white-space: nowrap; color: #506572; }
+    .refresh-chip { display: inline-flex; padding: 7px 10px; border-radius: 8px; background: #d9f7ef; color: #116f61; font-weight: 800; font-size: .78rem; margin-top: 8px; }
+
+    .simulator { background: #eef4f6; color: var(--white-ink); border-radius: 22px; padding: 30px; box-shadow: 0 26px 70px rgba(0,0,0,.24); }
+    .sim-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 34px; }
+    .control label { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-weight: 800; }
+    .control output { color: #087d6c; font-size: 1.32rem; }
+    input[type="range"] { width: 100%; margin: 18px 0 9px; accent-color: #087d6c; }
+    .ticks { display: flex; justify-content: space-between; color: #617583; font-size: .78rem; }
+    .select-wrap { margin-top: 28px; }
+    select { width: 100%; background: white; color: var(--white-ink); padding: 12px; border: 1px solid #c5d4da; border-radius: 9px; margin-top: 8px; }
+    .sim-note { font-size: .8rem; color: #617583; margin: 22px 0 0; }
+    .sim-results { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .result { background: white; border: 1px solid #d7e2e7; border-radius: 14px; padding: 18px; }
+    .result.wide { grid-column: span 2; background: #0e2937; color: white; border-color: #0e2937; }
+    .result-label { color: #6c7f8b; font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; }
+    .result.wide .result-label { color: #9fc5c9; }
+    .result-value { font-size: 1.8rem; font-weight: 800; letter-spacing: -.04em; margin-top: 6px; }
+    .result-detail { font-size: .78rem; color: #6b7f89; margin-top: 3px; }
+    .result.wide .result-detail { color: #a9c2c9; }
+
+    .reason-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+    .reason-row { display: grid; grid-template-columns: minmax(130px, 1fr) 2fr 55px; gap: 12px; align-items: center; margin: 15px 0; }
+    .reason-name { color: #c7d6df; font-size: .84rem; overflow-wrap: anywhere; }
+    .reason-bar { height: 10px; background: #223a4d; border-radius: 999px; overflow: hidden; }
+    .reason-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--teal), #78aefc); border-radius: inherit; }
+    .reason-share { font-size: .82rem; font-weight: 780; text-align: right; }
+    .boundary { padding: 24px; border: 1px solid #5d4c2e; background: #2b261c; border-radius: 16px; }
+    .boundary h3 { color: var(--amber); margin: 0 0 10px; }
+    .boundary p { color: #d3c6a8; margin: 0; }
+    .boundary ul { padding-left: 20px; color: #cbbd9d; }
+
+    .monitor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .monitor { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: rgba(255,255,255,.025); }
+    .monitor-value { color: var(--teal); font-size: 1.65rem; font-weight: 800; }
+    .monitor h3 { font-size: 1rem; margin: 10px 0 4px; }
+    .monitor p { color: var(--muted); font-size: .86rem; margin: 0; }
+    .recommendation { margin-top: 18px; padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; background: linear-gradient(120deg, #153a39, #112738); border: 1px solid #2c6d67; border-radius: 18px; }
+    .recommendation h3 { margin: 0 0 8px; font-size: 1.4rem; }
+    .recommendation p { margin: 0; color: #b6d1d1; max-width: 760px; }
+    .decision-tag { color: #072019; background: var(--teal); padding: 12px 16px; border-radius: 10px; font-weight: 850; white-space: nowrap; }
+
+    footer { border-top: 1px solid var(--line); padding: 34px 0 48px; color: var(--muted); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 24px; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { color: #c1d2dc; }
+    .noscript { padding: 12px; background: #6a2f2f; color: white; text-align: center; }
+
+    @media (max-width: 900px) {
+      nav a:not(.github-link) { display: none; }
+      .hero-grid, .section-head, .model-grid, .sim-grid, .reason-grid { grid-template-columns: 1fr; }
+      .kpis { grid-template-columns: 1fr 1fr; }
+      .timeline { grid-template-columns: 1fr 1fr; }
+      .phase, .phase:first-child, .phase:last-child { border-radius: 10px; }
+      .monitor-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      .hero { padding-top: 38px; }
+      h1 { font-size: 2.65rem; }
+      .kpis, .timeline, .diagnosis, .sim-results { grid-template-columns: 1fr; }
+      .result.wide { grid-column: span 1; }
+      .metric-row { grid-template-columns: 110px 1fr 42px; gap: 8px; }
+      .reason-row { grid-template-columns: 105px 1fr 45px; gap: 8px; }
+      .recommendation { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <noscript><div class="noscript">The policy simulator needs JavaScript; all reported model results remain visible.</div></noscript>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top"><span class="brand-mark">D</span><span>Credit Risk Decision Lab</span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#validation">Validation</a>
+        <a href="#models">Models</a>
+        <a href="#policy">Policy lab</a>
+        <a href="#governance">Governance</a>
+        <a class="github-link" href="https://github.com/nhatphan220506/credit-risk-decision-lab" target="_blank" rel="noreferrer">View source</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell">
+        <span class="eyebrow">Portfolio case study · real competition data</span>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>From risk score to lending decision.</h1>
+            <p>A time-aware credit-risk study that asks whether a lender can preserve risk ranking, repair probability drift, and set approval policy without confusing model accuracy with business readiness.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="#policy">Explore policy trade-offs</a>
+              <a class="button secondary" href="#validation">See the analytical design</a>
+            </div>
+          </div>
+          <aside class="verdict">
+            <strong>Decision: advance to shadow mode</strong>
+            Ranking remains strong in future cohorts. Absolute PD needs monitored recalibration before it can support pricing, capital or expected-loss decisions.
+          </aside>
+        </div>
+        <div class="kpis" aria-label="Headline model metrics">
+          <article class="kpi"><div class="kpi-label">Applications</div><div class="kpi-value">1.53M</div><div class="kpi-note">92 weekly cohorts</div></article>
+          <article class="kpi"><div class="kpi-label">Locked OOT AUC</div><div class="kpi-value kpi-accent">0.825</div><div class="kpi-note">vs 0.711 linear baseline</div></article>
+          <article class="kpi"><div class="kpi-label">OOT Gini</div><div class="kpi-value">0.651</div><div class="kpi-note">stable weekly ordering</div></article>
+          <article class="kpi"><div class="kpi-label">ECE reduction</div><div class="kpi-value kpi-accent">80.1%</div><div class="kpi-note">delayed-label intercept refresh</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="validation">
+      <div class="shell">
+        <div class="section-head">
+          <div><span class="section-index">01 · Analytical design</span><h2>Time is part of the problem.</h2></div>
+          <p class="section-intro">A random split would blend different risk regimes and overstate probability stability. Every stage receives its own chronological window, and the final 14 weeks stay locked until evaluation.</p>
+        </div>
+        <div class="panel panel-pad">
+          <h3 class="panel-title">Chronological evidence chain</h3>
+          <p class="panel-sub">No cohort is reused for tuning, calibration, policy selection or final reporting.</p>
+          <div class="timeline" role="img" aria-label="Development weeks 0 to 54, calibration weeks 55 to 68, policy weeks 69 to 77 and locked out-of-time weeks 78 to 91">
+            <div class="phase"><strong>Development</strong><span class="weeks">W0–54</span><small>1,129,770 cases</small><span class="rate">3.13% default</span></div>
+            <div class="phase cal"><strong>Calibration</strong><span class="weeks">W55–68</span><small>171,375 cases</small><span class="rate">4.51% default</span></div>
+            <div class="phase policy"><strong>Policy</strong><span class="weeks">W69–77</span><small>73,807 cases</small><span class="rate">2.35% default</span></div>
+            <div class="phase oot"><strong>Locked OOT</strong><span class="weeks">W78–91</span><small>151,707 cases</small><span class="rate">2.12% default</span></div>
+          </div>
+          <div class="diagnosis">
+            <div class="diagnosis-card"><strong>Population regime shift</strong><p>OOT default prevalence is 32.2% below development and 53.1% below calibration. This is exactly what a random split would conceal.</p></div>
+            <div class="diagnosis-card"><strong>Leakage boundary</strong><p>Identifiers, file partitions, decision month and cohort fields never enter the model. Absolute dates become days before the decision.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="models">
+      <div class="shell">
+        <div class="section-head">
+          <div><span class="section-index">02 · Model evidence</span><h2>Strong ranking. Honest calibration.</h2></div>
+          <p class="section-intro">The challenger materially improves future-cohort discrimination. The dashboard also exposes its weakness: a score calibrated in a high-default window overpredicts risk when prevalence falls.</p>
+        </div>
+        <div class="model-grid">
+          <article class="panel panel-pad">
+            <h3 class="panel-title">Locked OOT comparison</h3>
+            <p class="panel-sub">151,707 applications · weeks 78–91</p>
+            <div class="metric-row"><span class="metric-label">Linear · AUC</span><div class="track"><div class="bar" style="width:71.13%"></div></div><span class="metric-value">.711</span></div>
+            <div class="metric-row"><span class="metric-label">XGBoost · AUC</span><div class="track"><div class="bar challenger" style="width:82.53%"></div></div><span class="metric-value">.825</span></div>
+            <div class="metric-row"><span class="metric-label">Linear · AP</span><div class="track"><div class="bar" style="width:32.2%"></div></div><span class="metric-value">.064</span></div>
+            <div class="metric-row"><span class="metric-label">XGBoost · AP</span><div class="track"><div class="bar challenger" style="width:69.2%"></div></div><span class="metric-value">.138</span></div>
+            <div class="legend"><span>Linear baseline</span><span>XGBoost challenger</span></div>
+          </article>
+          <article class="panel panel-pad calibration-card">
+            <h3 class="panel-title">Delayed-label calibration backtest</h3>
+            <p class="panel-sub">Refresh on weeks 78–84; evaluate on weeks 85–91</p>
+            <div class="cal-bars" role="img" aria-label="Observed rate 2.06 percent, original predicted rate 3.41 percent and refreshed predicted rate 2.31 percent">
+              <div class="cal-group"><div class="cal-col observed"><span>2.06%</span></div><div class="cal-col predicted"><span>3.41%</span></div><span class="cal-group-label">Original</span></div>
+              <div class="cal-group"><div class="cal-col observed"><span>2.06%</span></div><div class="cal-col predicted" style="height:123px"><span>2.31%</span></div><span class="cal-group-label">Refreshed</span></div>
+            </div>
+            <span class="refresh-chip">ECE 0.01352 → 0.00269</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="policy">
+      <div class="shell">
+        <div class="section-head">
+          <div><span class="section-index">03 · Decision lab</span><h2>Move the approval frontier.</h2></div>
+          <p class="section-intro">Choose a policy target and LGD scenario. Cut-offs were selected on policy weeks and applied unchanged to locked OOT—so the result measures transfer, not retrospective optimisation.</p>
+        </div>
+        <div class="simulator">
+          <div class="sim-grid">
+            <div>
+              <div class="control">
+                <label for="approval">Policy approval target <output id="approvalOutput">40%</output></label>
+                <input id="approval" type="range" min="20" max="80" step="20" value="40" aria-describedby="approvalHelp">
+                <div class="ticks" id="approvalHelp"><span>20% conservative</span><span>80% growth</span></div>
+              </div>
+              <div class="control select-wrap">
+                <label for="lgd">Loss-given-default scenario</label>
+                <select id="lgd"><option value="0.25">25% LGD</option><option value="0.45" selected>45% LGD</option><option value="0.65">65% LGD</option></select>
+              </div>
+              <p class="sim-note">LGD is an explicit sensitivity assumption. Credit amount is an exposure proxy. These outputs are not regulatory expected loss or a profit forecast.</p>
+            </div>
+            <div class="sim-results" aria-live="polite">
+              <div class="result"><div class="result-label">Frozen PD cutoff</div><div class="result-value" id="cutoff">1.567%</div><div class="result-detail">selected before OOT</div></div>
+              <div class="result"><div class="result-label">Actual OOT approval</div><div class="result-value" id="actualApproval">42.33%</div><div class="result-detail" id="approvedCount">64,222 applications</div></div>
+              <div class="result"><div class="result-label">Approved bad rate</div><div class="result-value" id="badRate">0.319%</div><div class="result-detail">observed target rate</div></div>
+              <div class="result"><div class="result-label">Approved exposure</div><div class="result-value" id="exposure">3.36B</div><div class="result-detail">credit-amount proxy</div></div>
+              <div class="result wide"><div class="result-label">Scenario expected loss</div><div class="result-value" id="expectedLoss">12.70M</div><div class="result-detail" id="lossFormula">model PD × exposure proxy × 45% LGD</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="explainability">
+      <div class="shell">
+        <div class="section-head">
+          <div><span class="section-index">04 · Explainability</span><h2>Evidence, not decoration.</h2></div>
+          <p class="section-intro">Candidate reason codes come from the largest positive local log-odds contribution in a deterministic 10,000-case OOT sample. Only aggregate prevalence is published.</p>
+        </div>
+        <div class="reason-grid">
+          <article class="panel panel-pad">
+            <h3 class="panel-title">Top local positive-risk reason</h3>
+            <p class="panel-sub">Share of sampled OOT applications</p>
+            <div class="reason-row"><span class="reason-name">Monthly annuity</span><div class="reason-bar"><i style="width:100%"></i></div><span class="reason-share">22.9%</span></div>
+            <div class="reason-row"><span class="reason-name">Avg tolerated DPD at closure</span><div class="reason-bar"><i style="width:56.2%"></i></div><span class="reason-share">12.9%</span></div>
+            <div class="reason-row"><span class="reason-name">Last rejection date</span><div class="reason-bar"><i style="width:41.8%"></i></div><span class="reason-share">9.6%</span></div>
+            <div class="reason-row"><span class="reason-name">Shared mobile count</span><div class="reason-bar"><i style="width:41.4%"></i></div><span class="reason-share">9.5%</span></div>
+            <div class="reason-row"><span class="reason-name">Payment count</span><div class="reason-bar"><i style="width:40%"></i></div><span class="reason-share">9.2%</span></div>
+          </article>
+          <aside class="boundary">
+            <h3>Explanation boundary</h3>
+            <p>These are internal diagnostic candidates—not customer-facing adverse-action notices.</p>
+            <ul>
+              <li>Global importance is not a reason code.</li>
+              <li>Correlation does not establish causality.</li>
+              <li>Direction and semantics need validation.</li>
+              <li>Legal suitability requires jurisdiction review.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="governance">
+      <div class="shell">
+        <div class="section-head">
+          <div><span class="section-index">05 · Model risk</span><h2>What would make us stop?</h2></div>
+          <p class="section-intro">A deployable lending model needs explicit monitoring and reversal conditions. Good OOT discrimination is necessary, but it is not permission to automate adverse action.</p>
+        </div>
+        <div class="monitor-grid">
+          <article class="monitor"><div class="monitor-value">0.10 / 0.25</div><h3>Score PSI</h3><p>Investigate at 0.10; treat 0.25 as a population-drift breach.</p></article>
+          <article class="monitor"><div class="monitor-value">−0.03 / −0.05</div><h3>AUC decline</h3><p>Warning and breach thresholds relative to the validated reference.</p></article>
+          <article class="monitor"><div class="monitor-value">2.0 / 5.0 pp</div><h3>Calibration gap</h3><p>Monitor only after outcomes mature; refresh an intercept before refitting rank.</p></article>
+        </div>
+        <div class="recommendation">
+          <div><h3>Recommended next decision</h3><p>Run the challenger in shadow mode, retain decision-time inputs, validate reason-code consistency, complete protected-group testing with lawful audit attributes, and compare model recommendations with reviewer overrides.</p></div>
+          <span class="decision-tag">SHADOW MODE</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <div>Credit Risk Decision Lab · Portfolio evidence, not a production lending system.</div>
+      <div class="footer-links"><a href="https://github.com/nhatphan220506/credit-risk-decision-lab/blob/main/docs/model_card.md" target="_blank" rel="noreferrer">Model card</a><a href="https://github.com/nhatphan220506/credit-risk-decision-lab" target="_blank" rel="noreferrer">Source</a></div>
+    </div>
+  </footer>
+
+  <script>
+    const policies = {
+      20: { cutoff: 0.7544, approval: 20.9351, count: 31760, bad: 0.1480, exposure: 1.477358, loss45: 2.975333 },
+      40: { cutoff: 1.5674, approval: 42.3329, count: 64222, bad: 0.3192, exposure: 3.355129, loss45: 12.70439 },
+      60: { cutoff: 2.5737, approval: 61.9793, count: 94027, bad: 0.5318, exposure: 4.997796, loss45: 27.71767 },
+      80: { cutoff: 4.8197, approval: 80.7458, count: 122497, bad: 0.9176, exposure: 6.748337, loss45: 55.21524 }
+    };
+    const approval = document.querySelector('#approval');
+    const lgd = document.querySelector('#lgd');
+    const money = value => value.toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) + 'M';
+    function updatePolicy() {
+      const target = Number(approval.value);
+      const row = policies[target];
+      const selectedLgd = Number(lgd.value);
+      document.querySelector('#approvalOutput').textContent = target + '%';
+      document.querySelector('#cutoff').textContent = row.cutoff.toFixed(3) + '%';
+      document.querySelector('#actualApproval').textContent = row.approval.toFixed(2) + '%';
+      document.querySelector('#approvedCount').textContent = row.count.toLocaleString('en-US') + ' applications';
+      document.querySelector('#badRate').textContent = row.bad.toFixed(3) + '%';
+      document.querySelector('#exposure').textContent = row.exposure.toFixed(2) + 'B';
+      document.querySelector('#expectedLoss').textContent = money(row.loss45 * selectedLgd / .45);
+      document.querySelector('#lossFormula').textContent = 'model PD × exposure proxy × ' + Math.round(selectedLgd * 100) + '% LGD';
+    }
+    approval.addEventListener('input', updatePolicy);
+    lgd.addEventListener('change', updatePolicy);
+    updatePolicy();
+  </script>
+</body>
+</html>
