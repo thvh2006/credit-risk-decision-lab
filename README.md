@@ -23,6 +23,9 @@ The source target is **not** presented as a Basel or IFRS 9 probability of defau
 its contractual horizon and default definition are not publicly specified. Raw data
 is never committed because it is governed by Kaggle competition terms.
 
+Repository code and original documentation are MIT licensed. Home Credit source data
+is excluded and remains governed by the competition terms.
+
 ## Decision flow
 
 ```text
