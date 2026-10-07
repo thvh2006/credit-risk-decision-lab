@@ -8,7 +8,7 @@ has the best AUC?”:
 > applicant population changes, and turn the score into a controlled underwriting
 > policy with honest economic and regulatory boundaries?
 
-**[Open the interactive decision dashboard](https://nhatphan220506.github.io/credit-risk-decision-lab/)** ·
+**[Open the interactive decision dashboard](https://thvh2006.github.io/credit-risk-decision-lab/)** ·
 [Model card](docs/model_card.md) ·
 [Executive decision memo](docs/executive_decision_memo.md) ·
 [Reproduce the analysis](#reproduce)
@@ -26,7 +26,7 @@ policy, and production monitoring.
 
 ![Locked out-of-time model comparison and calibration level](reports/figures/oot_model_comparison.png)
 
-The [interactive dashboard](https://nhatphan220506.github.io/credit-risk-decision-lab/)
+The [interactive dashboard](https://thvh2006.github.io/credit-risk-decision-lab/)
 lets reviewers move the approval target and LGD assumption, then see the frozen OOT
 cut-off, realised approval rate, bad rate, exposure proxy, and scenario loss.
 
