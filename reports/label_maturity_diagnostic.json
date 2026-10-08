@@ -1,0 +1,12 @@
+{
+  "reference_last_week": 54,
+  "late_first_week": 78,
+  "reference_default_rate": 0.031254149074590405,
+  "late_default_rate": 0.021192166478804536,
+  "relative_default_rate_change": -0.3219406988740017,
+  "reference_mean_weekly_applications": 20541.272727272728,
+  "late_mean_weekly_applications": 10836.214285714286,
+  "relative_volume_change": -0.4724662668381301,
+  "right_censoring_can_be_ruled_out": false,
+  "reason": "The public target has no documented outcome-window end date or per-row label-maturity timestamp. Cohort drift and right-censoring cannot be separated from this table alone."
+}
