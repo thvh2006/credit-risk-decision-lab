@@ -15,8 +15,8 @@ review.
 - **Calibration:** Platt calibration on weeks 55–68.
 - **Policy selection:** weeks 69–77.
 - **Final evaluation:** locked weeks 78–91.
-- **Baseline:** L2 linear log-loss model on numeric features, median imputation and
-  missingness indicators.
+- **Baselines:** raw-value linear log-loss model plus a stronger quantile-binned
+  logistic model over the frozen depth-0 manifest.
 - **Challenger:** XGBoost histogram trees, depth 6, learning rate 0.035,
   column/row subsampling and regularisation; best iteration 1,194.
 
@@ -28,12 +28,15 @@ used for early stopping, calibration, threshold selection, and final reporting.
 | Model | Cohort | ROC AUC | Gini | Average precision | Brier | ECE | Observed rate | Mean predicted PD |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
 | Linear | Calibration | 0.6846 | 0.3693 | 0.1027 | 0.04210 | 0.00679 | 4.5135% | 4.5133% |
+| Binned logit | Calibration | 0.7483 | 0.4966 | 0.1359 | 0.04116 | 0.00324 | 4.5135% | 4.5135% |
 | XGBoost | Calibration | 0.7923 | 0.5847 | 0.1789 | 0.03997 | 0.00226 | 4.5135% | 4.5151% |
 | Linear | Locked OOT | 0.7113 | 0.4227 | 0.0644 | 0.02080 | 0.02006 | 2.1192% | 4.1255% |
+| Binned logit | Locked OOT | 0.7870 | 0.5739 | 0.0964 | 0.02006 | 0.00956 | 2.1192% | 3.0756% |
 | XGBoost | Locked OOT | **0.8253** | **0.6507** | **0.1384** | **0.01973** | **0.01286** | 2.1192% | 3.4055% |
 
 Average precision is about **6.5 times** the OOT base rate. The challenger improves
-OOT AUC by 0.114 and average precision by 0.074 over the linear baseline.
+OOT AUC by 0.038 and average precision by 0.042 over the stronger binned baseline.
+The raw linear comparison remains visible, but is not used to market model uplift.
 
 ![Model comparison](../reports/figures/oot_model_comparison.png)
 
@@ -45,7 +48,8 @@ ordering therefore survives the later cohorts well.
 
 Calibration does not. The challenger overpredicts the aggregate OOT rate by 1.286
 percentage points (3.406% versus 2.119%). This is consistent with calibration being
-fitted in a high-default regime. It is not fixed using OOT outcomes because doing so
+fitted in a high-target-rate cohort, but late-label right-censoring cannot be ruled
+out from the public fields. It is not fixed using OOT outcomes because doing so
 would invalidate the locked test. A production design would require delayed-label
 recalibration, calibration-intercept monitoring, and fallback rules while labels
 mature.
@@ -62,9 +66,11 @@ risk ordering.
 | Original calibration | 0.8335 | 0.01909 | 0.01352 | 2.057% | 3.409% |
 | Intercept refresh | 0.8335 | **0.01880** | **0.00269** | 2.057% | 2.310% |
 
-The correction reduces ECE by **80.1%** and leaves discrimination unchanged. This is
-evidence that much of the observed error is a prevalence-level shift; it is not a
-claim that all calibration drift is solved.
+The correction reduces ECE by **0.01083 absolute** (80.1% relative) and leaves
+discrimination unchanged. This is a strictly later backtest—not a fit on the same
+evaluation cohort. It shows that an intercept update can repair much of this sample's
+late-cohort error; it does not prove the shift is operational drift rather than label
+maturity, nor that all calibration drift is solved.
 
 ## Driver review
 
@@ -95,7 +101,7 @@ error/approval analysis, intersectional sample checks, and remediation governanc
 
 | Risk | Evidence | Required control |
 |---|---|---|
-| Prior probability shift | OOT observed 2.12%, predicted 3.41% | calibration-gap trigger and recalibration |
+| Prevalence / label-maturity ambiguity | OOT observed 2.12%, predicted 3.41%; late volume also falls | outcome-maturity contract before recalibration |
 | Provider coverage shift | 26,183 cases lack external static record | missingness and provider-availability monitoring |
 | Proxy discrimination | behavioural/bureau fields can correlate with protected traits | legal review, group audit, ablations |
 | Explanation mismatch | global gain is not a customer reason | constrained local reason-code pipeline |

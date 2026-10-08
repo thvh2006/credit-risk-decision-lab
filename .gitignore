@@ -9,6 +9,7 @@ data/raw/*
 data/processed/*
 models/*
 vendor/
+.openai/
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !models/.gitkeep

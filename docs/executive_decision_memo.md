@@ -8,8 +8,9 @@ its absolute probability level is not transportable without recalibration contro
 
 ## What the evidence supports
 
-The locked OOT AUC is 0.8253 versus 0.7113 for the linear baseline. The model is
-therefore materially better at ordering risk in future cohorts. Cut-offs selected on
+The locked OOT AUC is 0.8253 versus 0.7870 for the stronger quantile-binned logistic
+baseline (and 0.7113 for the raw linear baseline). The model is therefore better at
+ordering risk in future cohorts without relying on an inflated weak-baseline gap. Cut-offs selected on
 the earlier policy window also transfer without dramatic approval-volume drift:
 
 | Policy target | Frozen PD cut-off | OOT approval | OOT approved bad rate | OOT approved cases |
@@ -28,6 +29,8 @@ lower scores. This is preferable to a capacity shock but still requires limits.
 ## What the evidence does not support
 
 The model's OOT mean predicted PD is 3.41% while the observed target rate is 2.12%.
+Late weekly volume also falls, and label maturity cannot be ruled out because the
+release lacks an outcome-window end date. The gap must not be labelled pure drift.
 The ranking is useful; the numeric PD should not be fed directly into pricing,
 capital, or expected-loss reporting. The source also lacks validated recovery,
 realised EAD, funding cost, margin, and default-horizon fields. Monetary figures in

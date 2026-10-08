@@ -223,9 +223,9 @@
         </div>
         <div class="kpis" aria-label="Headline model metrics">
           <article class="kpi"><div class="kpi-label">Applications</div><div class="kpi-value">1.53M</div><div class="kpi-note">92 weekly cohorts</div></article>
-          <article class="kpi"><div class="kpi-label">Locked OOT AUC</div><div class="kpi-value kpi-accent">0.825</div><div class="kpi-note">vs 0.711 linear baseline</div></article>
+          <article class="kpi"><div class="kpi-label">Locked OOT AUC</div><div class="kpi-value kpi-accent">0.825</div><div class="kpi-note">vs 0.787 binned-logit baseline</div></article>
           <article class="kpi"><div class="kpi-label">OOT Gini</div><div class="kpi-value">0.651</div><div class="kpi-note">stable weekly ordering</div></article>
-          <article class="kpi"><div class="kpi-label">ECE reduction</div><div class="kpi-value kpi-accent">80.1%</div><div class="kpi-note">delayed-label intercept refresh</div></article>
+          <article class="kpi"><div class="kpi-label">Late-cohort ECE</div><div class="kpi-value kpi-accent">0.0027</div><div class="kpi-note">from 0.0135 after delayed-label refresh</div></article>
         </div>
       </div>
     </section>
@@ -246,7 +246,7 @@
             <div class="phase oot"><strong>Locked OOT</strong><span class="weeks">W78–91</span><small>151,707 cases</small><span class="rate">2.12% default</span></div>
           </div>
           <div class="diagnosis">
-            <div class="diagnosis-card"><strong>Population regime shift</strong><p>OOT default prevalence is 32.2% below development and 53.1% below calibration. This is exactly what a random split would conceal.</p></div>
+            <div class="diagnosis-card"><strong>Prevalence or maturity shift</strong><p>OOT target prevalence is 32.2% below development and weekly volume is 47.2% lower. The public target exposes no label-window end date, so population drift and right-censoring cannot be separated.</p></div>
             <div class="diagnosis-card"><strong>Leakage boundary</strong><p>Identifiers, file partitions, decision month and cohort fields never enter the model. Absolute dates become days before the decision.</p></div>
           </div>
         </div>
@@ -263,7 +263,8 @@
           <article class="panel panel-pad">
             <h3 class="panel-title">Locked OOT comparison</h3>
             <p class="panel-sub">151,707 applications · weeks 78–91</p>
-            <div class="metric-row"><span class="metric-label">Linear · AUC</span><div class="track"><div class="bar" style="width:71.13%"></div></div><span class="metric-value">.711</span></div>
+            <div class="metric-row"><span class="metric-label">Raw linear · AUC</span><div class="track"><div class="bar" style="width:71.13%"></div></div><span class="metric-value">.711</span></div>
+            <div class="metric-row"><span class="metric-label">Binned logit · AUC</span><div class="track"><div class="bar" style="width:78.70%"></div></div><span class="metric-value">.787</span></div>
             <div class="metric-row"><span class="metric-label">XGBoost · AUC</span><div class="track"><div class="bar challenger" style="width:82.53%"></div></div><span class="metric-value">.825</span></div>
             <div class="metric-row"><span class="metric-label">Linear · AP</span><div class="track"><div class="bar" style="width:32.2%"></div></div><span class="metric-value">.064</span></div>
             <div class="metric-row"><span class="metric-label">XGBoost · AP</span><div class="track"><div class="bar challenger" style="width:69.2%"></div></div><span class="metric-value">.138</span></div>
@@ -276,7 +277,7 @@
               <div class="cal-group"><div class="cal-col observed"><span>2.06%</span></div><div class="cal-col predicted"><span>3.41%</span></div><span class="cal-group-label">Original</span></div>
               <div class="cal-group"><div class="cal-col observed"><span>2.06%</span></div><div class="cal-col predicted" style="height:123px"><span>2.31%</span></div><span class="cal-group-label">Refreshed</span></div>
             </div>
-            <span class="refresh-chip">ECE 0.01352 → 0.00269</span>
+            <span class="refresh-chip">Late-cohort ECE 0.01352 → 0.00269</span>
           </article>
         </div>
       </div>

@@ -41,16 +41,19 @@ early stopping. This prevents tuning against calibration, policy, or OOT outcome
 ## Central diagnosis
 
 The OOT target rate is **32.2% lower** than development and **53.1% lower** than
-calibration. A random split would mix these regimes and make probability calibration
-look more stable than it is. Chronological validation reveals two different model
-questions:
+calibration. Mean weekly application volume is also **47.2% lower** than development.
+A random split would hide this cohort change, but the public fields cannot distinguish
+population drift from right-censoring: no outcome-window end date or per-row
+label-maturity timestamp is provided. Chronological validation therefore reveals
+three different questions:
 
 1. Does the model preserve risk ordering as the population changes?
 2. Does a fitted probability still represent the new cohort's absolute event rate?
+3. Are late labels mature enough for either answer to be interpreted operationally?
 
-The benchmark answers “largely yes” to the first and “not without monitoring or
-recalibration” to the second. That distinction is the main analytical finding of the
-project.
+The benchmark answers “largely yes” to the first, “not without controls” to the
+second, and “not identifiable from this release” to the third. See
+`reports/label_maturity_diagnostic.json`.
 
 ## Feature controls
 

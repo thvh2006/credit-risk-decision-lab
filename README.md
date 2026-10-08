@@ -17,12 +17,14 @@ has the best AUC?”:
 
 | Scale | Locked OOT performance | Calibration action | Recommended decision |
 |---|---|---|---|
-| **1.53M** applications across 92 weeks | **0.8253 AUC**, **0.6507 Gini** | ECE reduced **80.1%** with a delayed-label intercept refresh | Advance to **shadow mode**, not automated decline |
+| **1.53M** applications across 92 weeks | **0.8253 AUC**, **0.6507 Gini** | Late-cohort ECE **0.0135 → 0.0027** in a strictly later backtest | Advance to **shadow mode**, not automated decline |
 
 The challenger preserves risk ordering in future cohorts, but its absolute PD level
-does not travel unchanged across prevalence regimes. The project therefore separates
+does not travel unchanged across cohorts. The project therefore separates
 four questions that are often collapsed into one: ranking, calibration, underwriting
-policy, and production monitoring.
+policy, and production monitoring. Falling late-cohort target rates are treated as
+**ambiguous between population drift and label maturity** because the public data do
+not expose an outcome-window end date.
 
 ![Locked out-of-time model comparison and calibration level](reports/figures/oot_model_comparison.png)
 
@@ -36,7 +38,8 @@ cut-off, realised approval rate, bad rate, exposure proxy, and scenario loss.
 
 - leakage-safe relational feature engineering at application time;
 - chronological development, calibration, policy, and locked out-of-time cohorts;
-- an interpretable logistic baseline and an XGBoost challenger;
+- a raw linear baseline, a quantile-binned scorecard-like logistic baseline, and an
+  XGBoost challenger;
 - discrimination, calibration, time stability, and drift diagnostics;
 - approval/manual-review/decline policy simulation with explicit LGD assumptions;
 - delayed-label intercept recalibration and aggregate local reason-code evidence;
@@ -102,15 +105,17 @@ On macOS, XGBoost also needs the OpenMP runtime (`brew install libomp`). No raw
 competition file is distributed by this repository.
 
 After joining the Kaggle competition, place source files under `data/raw/`. That
-directory, prepared data, and fitted artefacts are ignored by Git. The first data
-milestone uses `train_base.parquet` to prove the temporal evaluation harness before
-adding depth-0/1 relational history.
+directory, prepared data, and fitted artefacts are ignored by Git. The current model
+uses base plus depth-0 static application features; deeper relationship-history tables
+remain future work and are not implied by the headline score.
 
 ## Headline locked-OOT result
 
 The depth-0 XGBoost challenger reaches **0.8253 ROC AUC**, **0.6507 Gini**, and
-**0.1384 average precision** on 151,707 locked OOT applications. The corresponding
-linear baseline reaches 0.7113 AUC. Ranking remains strong, while absolute calibration
+**0.1384 average precision** on 151,707 locked OOT applications. A stronger
+quantile-binned logistic baseline reaches **0.7870 AUC** and **0.0964 AP**; the raw
+linear baseline reaches 0.7113 AUC. The fairer challenger gap is therefore **3.84 AUC
+points**, not 11.4. Ranking remains strong, while absolute calibration
 drifts: mean predicted PD is 3.41% versus a 2.12% observed target rate. This is the
 project's central model-risk finding, not a number hidden by random splitting.
 
@@ -120,10 +125,11 @@ score or policy simulation.
 
 ## Evidence standard
 
-Headline results will only be added after the pipeline runs on the real source data.
-Until then, no model score, approval uplift, or business impact is claimed. Every
-reported result must identify its cohort, sample size, target rate, model version,
-calibration method, and whether a parameter is observed or assumed.
+Headline results come from the real competition source and identify cohort, sample
+size, target rate, model version, calibration method, and observed-versus-assumed
+parameters. The source target is not presented as regulatory PD. Label maturity
+cannot be proven from the published fields, so late prevalence is never described as
+pure population regime change.
 
 ## Current status
 
@@ -135,6 +141,8 @@ calibration method, and whether a parameter is observed or assumed.
 - [x] monitoring triggers and tests
 - [x] source-data profile and checksummed feature inventory
 - [x] logistic and XGBoost OOT benchmark
+- [x] stronger quantile-binned logistic baseline
+- [x] explicit label-maturity ambiguity diagnostic
 - [x] calibration, policy, OOT transfer, and LGD sensitivity reports
 - [x] model card and executive decision memo
 - [x] privacy-safe local reason-code prototype and rolling recalibration backtest
