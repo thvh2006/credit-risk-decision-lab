@@ -13,6 +13,12 @@ has the best AUC?”:
 [Executive decision memo](docs/executive_decision_memo.md) ·
 [Reproduce the analysis](#reproduce)
 
+## Start here
+
+- [Executed research walkthrough](notebooks/01_research_walkthrough.ipynb) — decision-time eligibility, date transformations, exclusions, and label maturity
+- [Executed model validation](notebooks/02_model_validation.ipynb) — raw linear, binned-logit, XGBoost, calibration, and locked OOT
+- [Feature provenance](docs/feature_provenance.md) and [machine-readable register](reports/feature_provenance.csv)
+
 ## Executive snapshot
 
 | Scale | Locked OOT performance | Calibration action | Recommended decision |
