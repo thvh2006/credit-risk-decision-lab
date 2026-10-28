@@ -15,8 +15,8 @@ has the best AUC?”:
 
 ## Start here
 
-- [Executed research walkthrough](notebooks/01_research_walkthrough.ipynb) — decision-time eligibility, date transformations, exclusions, and label maturity
-- [Executed model validation](notebooks/02_model_validation.ipynb) — raw linear, binned-logit, XGBoost, calibration, and locked OOT
+- [Deep executed research walkthrough](notebooks/01_research_walkthrough.ipynb) — decision-time eligibility, chronology, feature governance, label maturity, data-quality diagnostics, and limitations
+- [Deep executed model validation](notebooks/02_model_validation.ipynb) — model ladder, calibration, locked OOT, policy sensitivity, reason evidence, and promotion gates
 - [Feature provenance](docs/feature_provenance.md) and [machine-readable register](reports/feature_provenance.csv)
 
 ## Executive snapshot
